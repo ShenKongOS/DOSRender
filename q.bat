@@ -1,0 +1,1 @@
+g++ s1.cpp -o s1.exe -O3 -mfpmath=387
