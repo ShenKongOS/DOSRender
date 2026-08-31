@@ -33,30 +33,24 @@ public:
 
 
 #define TWO_PI 6.28318530718
-   vec2 st = cFragCoord.xy()/u_resolution.xy();
+  vec2 st = cFragCoord.xy()/u_resolution.xy();
   st.x *= u_resolution.x/u_resolution.y;
   vec3 color = vec3(0.0);
   float d = 0.0;
 
-  // Remap the space to -1. to 1.
   st = st *2.-1.;
 
-  // Number of sides of your shape
   int N = 3;
 
-  // Angle and radius from the current pixel
   float a = atan(st.y,st.x)+PI*sin(u_time);//+PI/2.
   float r = TWO_PI/float(N);
-	float my_a =atan(st.y,st.x)+PI*sin(u_time);
-    float my_r = TWO_PI/3.0;
+  float my_a =atan(st.y,st.x)+PI*sin(u_time);
+  float my_r = TWO_PI/3.0;
     
-  // Shaping function that modulate the distance
   d = cos(floor(.5+a/r)*r-a)*length(st);
   float d2 = cos(floor(.5+my_a/my_r)*my_r-my_a)*length(st);
   color = vec3(1.0-smoothstep(.4,.41,d));
-   //color = vec3(d);
-
-    color = mix(color,vec3(abs(sin(u_time))+0.2,0.2,0.3),d2);
+  color = mix(color,vec3(abs(sin(u_time))+0.2,0.2,0.3),d2);
 
    
     
